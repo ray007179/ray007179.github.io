@@ -24,14 +24,19 @@
         }
 
         /* 標題樣式（僅套用於 Hero） */
-        .hero h1 {
-            font-family: 'Noto Sans TC', 'Microsoft JhengHei', Arial, sans-serif;
+        .hero .title1 {
             text-align: center;
             font-size: clamp(2rem, 8vw, 4.5rem);
             line-height: 1.05;
             margin: 0;
             letter-spacing: 0.5px;
             word-break: keep-all;
+        }
+
+        /* title1 的內容文字樣式（分離內容與排版） */
+        .title1-text {
+            display: inline-block;
+            font-family: 'Noto Sans TC', 'Microsoft JhengHei', Arial, sans-serif;
         }
 
         /* Hero 區段落 */
@@ -60,8 +65,10 @@
     <header class="hero d-flex align-items-center">
         <div class="container py-5">
             <div class="row">
-                <div class="col-lg-8 text-center">
-                    <h1 class="title1" style="font-family: 'Noto Sans TC';">Welcome to my autobiography</h1>
+                <div class="col-lg-8 mx-auto text-center">
+                    <h1 class="title1">
+                        <span class="title1-text">Welcome to my autobiography</span>
+                    </h1>
                 </div>
             </div>
         </div>

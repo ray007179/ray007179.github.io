@@ -18,6 +18,7 @@
 
         /* 頂部 Hero 區域：頁首區塊背景與整體視覺 */
         .hero {
+            position: relative;
             min-height: 30vh;
             background: linear-gradient(180deg, rgba(219, 234, 254, 0.95), rgba(238, 245, 251, 0.95));
             color: #0f172a;
@@ -25,6 +26,10 @@
 
         /* 大標題樣式：Hero 文字字型、尺寸與顏色 */
         .hero .title1 {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
             text-align: center;
             font-size: clamp(2rem, 6vw, 3.75rem);
             line-height: 1.05;
@@ -32,19 +37,21 @@
             letter-spacing: 0.5px;
             word-break: keep-all;
             color: #1e40af;
+            width: calc(100% - 32px);
+            max-width: 720px;
         }
 
         /* 大標題文字內容排版：內部文字的換行與寬度控制 */
         .title1-text {
             display: inline-block;
             font-family: 'Noto Sans TC', 'Microsoft JhengHei', Arial, sans-serif;
-            white-space: nowrap;
+            white-space: nowrap;/*不換行*/
             overflow-wrap: normal;
         }
-
+        /*小於770px*/
         @media (max-width: 770px) {
             .title1-text {
-                white-space: normal;
+                white-space: normal;/*一般*/
             }
         }
 
@@ -99,7 +106,7 @@
             object-fit: cover;
         }
 
-        /* 標題文字樣式：各區塊標題與卡片內副標題 */
+        /* h2,h3,h5樣式 */
         .section-title h2 {
             font-size: 2.2rem;
             font-weight: 800;
@@ -114,18 +121,15 @@
             color: #0f172a;
         }
 
-        .card-body h5,
-        .card-title {
+        .card-body h5,.card-title {
             font-size: 1.15rem;
             font-weight: 700;
             color: #1e3a8a;
         }
 
         /* 內文與列表文字：卡片內段落、清單與文字色彩 */
-        .row .card-body p,
-        .row .card-body ul,
-        .card-body p,
-        .card-body li {
+        .row .card-body p,.row .card-body ul,.card-body p,.card-body li 
+        {
             color: #475569;
             font-size: 1rem;
         }
@@ -139,8 +143,7 @@
             text-align: center;
         }
 
-        .card-body h3,
-        .card-body h5 {
+        .card-body h3,.card-body h5 {
             margin-top: 0;
         }
 
@@ -278,8 +281,8 @@
             backdrop-filter: blur(3px);
             pointer-events: none;
         }
-
-        /* 左側浮動導航：固定位置、展開效果與尺寸控制 */
+        /********************************************************************************************/
+        /* 左側附錄：左側浮動導航 */
         .side-nav {
             position: fixed;
             left: 0;
@@ -376,13 +379,12 @@
 <body>
     <div class="frosted-bg"></div>
     <div class="frosted-overlay"></div>
-    <!--左側浮動目錄-->
+    <!-- 左側附錄：左側浮動目錄 -->
     <nav class="side-nav" aria-label="Section navigation">
         <a class="side-nav-item" href="#about">
             <span class="bullet"></span>
             <span class="text">關於我</span>
         </a>
-
         <a class="side-nav-item" href="#skills">
             <span class="bullet"></span>
             <span class="text">專業技能</span>
@@ -404,7 +406,7 @@
             <span class="text">感觸</span>
         </a>
     </nav>
-    <!-- 頁首設計 -->
+    <!-- 頁首 -->
     <header class="hero d-flex align-items-center">
         <div class="container py-5">
             <div class="row">

@@ -83,6 +83,22 @@
             line-height: 1.75;
         }
 
+        #skills2 .card-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 10rem;
+        }
+
+        #skills2 .card-body p {
+            min-height: 4.5rem;
+        }
+
+        #skills2 .card-img-top {
+            height: 220px;
+            object-fit: cover;
+        }
+
         /* 標題文字樣式：各區塊標題與卡片內副標題 */
         .section-title h2 {
             font-size: 2.2rem;
@@ -126,6 +142,67 @@
         .card-body h3,
         .card-body h5 {
             margin-top: 0;
+        }
+
+        /* 時間軸：垂直線與節點樣式 */
+        .timeline {
+            position: relative;
+            padding-left: 3.5rem;
+        }
+
+        .timeline-line {
+            left: 11rem;
+            width: 2px;
+            height: 100%;
+            background: rgba(59, 130, 246, 0.25);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 10.8rem;
+            top: 1.5rem;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #1e40af;
+            border: 3px solid #ffffff;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.12);
+        }
+
+        .timeline-year {
+            font-weight: 700;
+            color: #1e40af;
+            letter-spacing: 0.02em;
+            font-size: 1.05rem;
+        }
+
+        .timeline-placeholder {
+            min-height: 4rem;
+            background: rgba(59, 130, 246, 0.04);
+            border-radius: 0.75rem;
+            padding: 1rem;
+        }
+
+        @media (max-width: 768px) {
+
+            .timeline-line,
+            .timeline-item::before {
+                left: 3rem;
+            }
+
+            .timeline {
+                padding-left: 2rem;
+            }
+
+            .timeline-item {
+                padding-left: 0.5rem;
+            }
         }
 
         /* 滾動行為：平滑滾動與捲動對齊效果 */
@@ -206,20 +283,20 @@
         .side-nav {
             position: fixed;
             left: 0;
-            top: 40%;
-            transform: translateY(-40%);
+            top: 50%;
+            transform: translateY(-50%);
             z-index: 1060;
-            width: 12px;
-            padding-left: 4px;
+            width: 16px;
+            padding-left: 5px;
             overflow: hidden;
             transition: width 0.28s ease, top 0.28s ease;
-            max-height: 220px;
+            max-height: calc(100vh - 80px);
         }
 
         .side-nav::before {
             content: '';
             position: absolute;
-            left: 6px;
+            left: 8px;
             top: 12px;
             bottom: 12px;
             width: 2px;
@@ -228,7 +305,7 @@
         }
 
         .side-nav:hover {
-            width: 220px;
+            width: 200px;
         }
 
         .side-nav a {
@@ -236,24 +313,30 @@
             align-items: center;
             gap: 10px;
             width: 100%;
-            min-height: 48px;
+            min-height: 52px;
             margin-bottom: 10px;
             padding: 0 10px 0 8px;
             border-radius: 0 24px 24px 0;
             color: #0f172a;
             text-decoration: none;
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(12px);
             transition: background 0.25s ease, color 0.25s ease;
             overflow: hidden;
         }
 
         .side-nav a .bullet {
-            width: 8px;
-            height: 8px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
             background: #1e40af;
             flex-shrink: 0;
+        }
+
+        .side-nav a:focus-visible,
+        .side-nav a.active {
+            background: rgba(30, 64, 175, 0.95);
+            color: #fff;
         }
 
         /* 導航連結文字：隱藏後透過滑鼠移動淡入 */
@@ -282,7 +365,7 @@
         }
 
         /* 響應式處理：小螢幕隱藏左側浮動導航 */
-        @media (max-width: 600px) {
+        @media (max-width: 800px) {
             .side-nav {
                 display: none;
             }
@@ -293,14 +376,13 @@
 <body>
     <div class="frosted-bg"></div>
     <div class="frosted-overlay"></div>
-
-
+    <!--左側浮動目錄-->
     <nav class="side-nav" aria-label="Section navigation">
         <a class="side-nav-item" href="#about">
             <span class="bullet"></span>
             <span class="text">關於我</span>
         </a>
-        
+
         <a class="side-nav-item" href="#skills">
             <span class="bullet"></span>
             <span class="text">專業技能</span>
@@ -309,12 +391,20 @@
             <span class="bullet"></span>
             <span class="text">專案作品</span>
         </a>
+        <a class="side-nav-item" href="#skills2">
+            <span class="bullet"></span>
+            <span class="text">活動紀錄</span>
+        </a>
+        <a class="side-nav-item" href="#timeline">
+            <span class="bullet"></span>
+            <span class="text">成長時間軸</span>
+        </a>
         <a class="side-nav-item" href="#articles">
             <span class="bullet"></span>
-            <span class="text">文章</span>
+            <span class="text">感觸</span>
         </a>
     </nav>
-
+    <!-- 頁首設計 -->
     <header class="hero d-flex align-items-center">
         <div class="container py-5">
             <div class="row">
@@ -349,23 +439,27 @@
                                     <h5 class="h6">個人簡介</h5>
                                     <p>我是一位資管系學生，對設計理想的程式與專業能力抱有濃厚興趣。</p>
                                 </div>
+
                                 <div class="col-md-6">
                                     <h5 class="h6">學歷</h5>
-                                    <p class="mb-0">高雄高級工業職業學校 資訊科畢業</p>
-                                    <p>現就讀於苗栗聯合大學 資訊管理系</p>
+                                    <p class="mb-0">高雄高級工業職業學校 資訊科畢業<br>現就讀於苗栗聯合大學 資訊管理系</p>
                                 </div>
+
                                 <div class="col-md-6">
                                     <h5 class="h6">興趣</h5>
-                                    <ul class="list-unstyled mb-0">
-                                        <li>製作遊戲程式</li>
-                                        <li>UI 設計</li>
-                                        <li>程式設計</li>
-                                    </ul>
+                                    <p class="mb-0">製作遊戲程式<br>UI/程式設計<br>打羽球<br>室內攀岩</p>
                                 </div>
+
                                 <div class="col-md-6">
                                     <h5 class="h6">目標</h5>
-                                    <p>希望能夠製作一款獨立遊戲。</p>
+                                    <p class="mb-0">希望能夠製作一款獨立遊戲。</p>
                                 </div>
+
+                                <div class="col-md-6">
+                                    <h5 class="h6">聯絡資料</h5>
+                                    <p class="mb-0">Email: ray007179@gmail.com<br>電話: 0912345678</p>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -441,22 +535,131 @@
             </div>
         </section>
 
+        <section id="skills2" class="mb-5">
+            <div class="section-title mb-4">
+                <h2>管系活動紀錄</h2>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm border-0">
+                        <img src="src/skills21.jpg" class="card-img-top" alt="管系活動紀錄 圖片">
+                        <div class="card-body">
+                            <h5 class="card-title">台鹽通霄廠參訪</h5>
+                            <p class="mb-0 text-muted">25年12/27時與參訪了台鹽通霄廠，了解一件成功的轉型所需要面臨的挑戰。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm border-0">
+                        <img src="src/skills22.jpg" class="card-img-top" alt="管系活動紀錄 圖片">
+                        <div class="card-body">
+                            <h5 class="card-title">Innoserve</h5>
+                            <p class="mb-0 text-muted">26年5/6時報名了innoserve競賽(未入圍</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="timeline" class="mb-5">
+            <div class="section-title mb-4">
+                <h2>成長時間軸</h2>
+            </div>
+            <div class="timeline position-relative py-4">
+                <div class="timeline-line position-absolute top-0"></div>
+
+                <div class="row g-5 timeline-item align-items-start">
+                    <div class="col-md-3 text-end">
+                        <div class="timeline-year">2021</div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="card h-100 shadow-sm border-0">
+                            <div class="card-body">
+                                <h5 class="card-title">高一階段</h5>
+                                <p class="timeline-placeholder mb-0 text-muted">
+                                    初次使用C++語言，對程式運算邏輯有了初步觀念，還記得都在做運算內容，例如:用*排列金字塔(正/顛倒,迴圈,遞迴函式等語法使用。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-5 timeline-item align-items-start">
+                    <div class="col-md-3 text-end">
+                        <div class="timeline-year">2022</div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="card h-100 shadow-sm border-0">
+                            <div class="card-body">
+                                <h5 class="card-title">高二階段</h5>
+                                <p class="timeline-placeholder mb-0 text-muted">
+                                    學習C#語言，開始接觸物件程式設計的概念，設計使用UI，結合程式邏輯，製作出簡單的遊戲程式。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-5 timeline-item align-items-start">
+                    <div class="col-md-3 text-end">
+                        <div class="timeline-year">2023</div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="card h-100 shadow-sm border-0">
+                            <div class="card-body">
+                                <h5 class="card-title">高三階段</h5>
+                                <p class="timeline-placeholder mb-0 text-muted">備考，但是我自學了Unity引擎開發小遊戲</p>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-5 timeline-item align-items-start">
+                    <div class="col-md-3 text-end">
+                        <div class="timeline-year">2024</div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="card h-100 shadow-sm border-0">
+                            <div class="card-body">
+                                <h5 class="card-title">大一階段</h5>
+                                <p class="timeline-placeholder mb-0 text-muted">回到了C#但是更加複雜了，從一開始專研一個語法邏輯，成長到能寫出一個完整的程式結構。初步學習到python語言更加易懂的語法，學到對小型專案開發經驗</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-5 timeline-item align-items-start">
+                    <div class="col-md-3 text-end">
+                        <div class="timeline-year">2025</div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="card h-100 shadow-sm border-0">
+                            <div class="card-body">
+                                <h5 class="card-title">大二階段</h5>
+                                <p class="timeline-placeholder mb-0 text-muted">用C++學到了資料結構及演算法，理解前端html,css設計與後端SQL開發基本技術，在參與規模較大的專案有一定了解，並向製作團隊的大型專案前進</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="articles" class="mb-5">
             <div class="section-title mb-4">
-                <h2>文章</h2>
+                <h2>感觸</h2>
             </div>
             <div class="card shadow-sm border-0">
                 <div class="card-body">
                     <h5 class="card-title">科技觀點</h5>
                     <p class="text-muted mb-0">
-                        我認為我很幸運生在AI快速發展的年代，學習成本降低，有容易接觸先進技術。<br>但同時我也為自身能力感到擔憂，以往程式可能要花數周時間才能完成，現在藉由AI幫助只需幾天就能完成專案。<br>我珍惜學習這些程式的過程，永遠記得當初為了消除BUG程式到處爬文的自己，這些都是我學習過程忘不了的回憶。
+                        現在的我即將升上大三，我認為我很幸運生在AI快速發展的年代，學習成本降低，有容易接觸先進技術。<br>但同時我也為自身能力感到擔憂，以往程式可能要花數周時間才能完成，現在藉由AI幫助只需幾天就能完成專案。<br>我珍惜學習這些程式的過程，永遠記得當初為了消除BUG程式到處爬文的自己，這些都是我學習過程忘不了的回憶。
                     </p>
                 </div>
             </div>
         </section>
-
     </main>
-
+    <!-- 頁尾設計 -->
     <footer class="bg-white py-4 border-top">
         <div class="container text-center">
             <p class="mb-0">Copyright © 2026 自傳網站</p>
@@ -464,8 +667,8 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    
-    
+
+    <!-- 區塊進入視窗動畫效果 -->
     <script>
         const observer = new IntersectionObserver(
             (entries) => {
